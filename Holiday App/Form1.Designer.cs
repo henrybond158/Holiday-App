@@ -61,11 +61,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbOutAirport = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.lblOutboundAirport = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.lblNumOfDays = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // startCal
@@ -73,12 +74,16 @@
             this.startCal.Location = new System.Drawing.Point(79, 54);
             this.startCal.Name = "startCal";
             this.startCal.TabIndex = 1;
+            this.startCal.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.startCal_DateChanged);
+            this.startCal.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.startCal_DateSelected);
             // 
             // endCal
             // 
             this.endCal.Location = new System.Drawing.Point(79, 234);
             this.endCal.Name = "endCal";
             this.endCal.TabIndex = 1;
+            this.endCal.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.endCal_DateChanged);
+            this.endCal.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.endCal_DateSelected);
             // 
             // label1
             // 
@@ -109,8 +114,7 @@
             "5",
             "6",
             "7",
-            "8",
-            "9"});
+            "8"});
             this.cmbPassangers.Location = new System.Drawing.Point(350, 124);
             this.cmbPassangers.Name = "cmbPassangers";
             this.cmbPassangers.Size = new System.Drawing.Size(121, 21);
@@ -1000,13 +1004,16 @@
             this.label6.TabIndex = 2;
             this.label6.Text = "Age";
             // 
-            // comboBox1
+            // cmbOutAirport
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(185, 423);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 6;
+            this.cmbOutAirport.FormattingEnabled = true;
+            this.cmbOutAirport.Items.AddRange(new object[] {
+            "Glasgow"});
+            this.cmbOutAirport.Location = new System.Drawing.Point(185, 423);
+            this.cmbOutAirport.Name = "cmbOutAirport";
+            this.cmbOutAirport.Size = new System.Drawing.Size(121, 21);
+            this.cmbOutAirport.TabIndex = 6;
+            this.cmbOutAirport.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -1043,16 +1050,26 @@
             this.button1.Text = "Get Extended Weather Forecasts";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // lblNumOfDays
+            // 
+            this.lblNumOfDays.AutoSize = true;
+            this.lblNumOfDays.Location = new System.Drawing.Point(313, 423);
+            this.lblNumOfDays.Name = "lblNumOfDays";
+            this.lblNumOfDays.Size = new System.Drawing.Size(95, 13);
+            this.lblNumOfDays.TabIndex = 11;
+            this.lblNumOfDays.Text = "Number of Days: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 524);
+            this.Controls.Add(this.lblNumOfDays);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblOutboundAirport);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbOutAirport);
             this.Controls.Add(this.cmbAge7);
             this.Controls.Add(this.cmbAge6);
             this.Controls.Add(this.cmbAge5);
@@ -1128,11 +1145,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbOutAirport;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label lblOutboundAirport;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblNumOfDays;
     }
 }
 
