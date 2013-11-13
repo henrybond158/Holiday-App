@@ -16,6 +16,10 @@ namespace Holiday_App
         public Form1()
         {
             InitializeComponent();
+            populateOutBoundAirport popList = new populateOutBoundAirport();
+            
+           cmbOutAirport.Items.AddRange(popList.initLists());
+           cmbDestPorts.Items.AddRange(popList.initLists());
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -300,6 +304,14 @@ namespace Holiday_App
         {
             getWeatherClass gwc = new getWeatherClass();
             gwc.getWeatherJSON(cmbOutAirport.Text);
+            populateOutBoundAirport popLists = new populateOutBoundAirport();
+            string [] inBoundList = (popLists.updateLists(cmbOutAirport.Text));
+            cmbDestPorts.Items.AddRange(inBoundList);
+        }
+
+        private void cmbDestPorts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

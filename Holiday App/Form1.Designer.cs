@@ -62,7 +62,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbOutAirport = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbDestPorts = new System.Windows.Forms.ComboBox();
             this.lblOutboundAirport = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -1007,21 +1007,20 @@
             // cmbOutAirport
             // 
             this.cmbOutAirport.FormattingEnabled = true;
-            this.cmbOutAirport.Items.AddRange(new object[] {
-            "Glasgow"});
             this.cmbOutAirport.Location = new System.Drawing.Point(185, 423);
             this.cmbOutAirport.Name = "cmbOutAirport";
             this.cmbOutAirport.Size = new System.Drawing.Size(121, 21);
             this.cmbOutAirport.TabIndex = 6;
             this.cmbOutAirport.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // comboBox2
+            // cmbDestPorts
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(185, 475);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 7;
+            this.cmbDestPorts.FormattingEnabled = true;
+            this.cmbDestPorts.Location = new System.Drawing.Point(185, 475);
+            this.cmbDestPorts.Name = "cmbDestPorts";
+            this.cmbDestPorts.Size = new System.Drawing.Size(121, 21);
+            this.cmbDestPorts.TabIndex = 7;
+            this.cmbDestPorts.SelectedIndexChanged += new System.EventHandler(this.cmbDestPorts_SelectedIndexChanged);
             // 
             // lblOutboundAirport
             // 
@@ -1068,7 +1067,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblOutboundAirport);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cmbDestPorts);
             this.Controls.Add(this.cmbOutAirport);
             this.Controls.Add(this.cmbAge7);
             this.Controls.Add(this.cmbAge6);
@@ -1146,7 +1145,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmbOutAirport;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbDestPorts;
         private System.Windows.Forms.Label lblOutboundAirport;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
