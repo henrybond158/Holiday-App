@@ -69,7 +69,7 @@ namespace Holiday_App
             
             if (returnedString[0] == returnedString[1])
             {
-                string nodeString = "/weatherdata/forecast/time/[@from='" + returnedString[0] + "']";
+                string nodeString = "/weatherdata/forecast/time/[@from='" + returnedString[0] + "T09:00:00" + "']";
                 XmlNodeList xnl = xml.SelectNodes(nodeString);
 
             }
