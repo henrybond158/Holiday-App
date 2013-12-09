@@ -1,6 +1,6 @@
 ﻿namespace Holiday_App
 {
-    partial class Form1
+    partial class MainSelectionPage
     {
         /// <summary>
         /// Required designer variable.
@@ -65,13 +65,18 @@
             this.cmbDestPorts = new System.Windows.Forms.ComboBox();
             this.lblOutboundAirport = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnExtendedForecast = new System.Windows.Forms.Button();
             this.lblNumOfDays = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnGetPrices = new System.Windows.Forms.Button();
+            this.cmbHolTYpe = new System.Windows.Forms.ComboBox();
+            this.currentDate = new System.Windows.Forms.MonthCalendar();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // startCal
             // 
-            this.startCal.Location = new System.Drawing.Point(79, 54);
+            this.startCal.Location = new System.Drawing.Point(76, 54);
             this.startCal.Name = "startCal";
             this.startCal.TabIndex = 1;
             this.startCal.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.startCal_DateChanged);
@@ -1040,14 +1045,15 @@
             this.label8.TabIndex = 9;
             this.label8.Text = "Destinations";
             // 
-            // button1
+            // btnExtendedForecast
             // 
-            this.button1.Location = new System.Drawing.Point(79, 408);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 48);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Get Extended Weather Forecasts";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnExtendedForecast.Location = new System.Drawing.Point(78, 475);
+            this.btnExtendedForecast.Name = "btnExtendedForecast";
+            this.btnExtendedForecast.Size = new System.Drawing.Size(98, 48);
+            this.btnExtendedForecast.TabIndex = 10;
+            this.btnExtendedForecast.Text = "Get Extended Weather Forecasts";
+            this.btnExtendedForecast.UseVisualStyleBackColor = true;
+            this.btnExtendedForecast.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblNumOfDays
             // 
@@ -1058,13 +1064,57 @@
             this.lblNumOfDays.TabIndex = 11;
             this.lblNumOfDays.Text = "Number of Days: 0";
             // 
-            // Form1
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(76, 408);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 61);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnGetPrices
+            // 
+            this.btnGetPrices.Location = new System.Drawing.Point(632, 408);
+            this.btnGetPrices.Name = "btnGetPrices";
+            this.btnGetPrices.Size = new System.Drawing.Size(114, 76);
+            this.btnGetPrices.TabIndex = 13;
+            this.btnGetPrices.Text = "Get Prices";
+            this.btnGetPrices.UseVisualStyleBackColor = true;
+            this.btnGetPrices.Click += new System.EventHandler(this.btnGetPrices_Click);
+            // 
+            // cmbHolTYpe
+            // 
+            this.cmbHolTYpe.FormattingEnabled = true;
+            this.cmbHolTYpe.Items.AddRange(new object[] {
+            "Just Flights",
+            "Relax",
+            "Cultural",
+            "Adventure"});
+            this.cmbHolTYpe.Location = new System.Drawing.Point(15, 13);
+            this.cmbHolTYpe.Name = "cmbHolTYpe";
+            this.cmbHolTYpe.Size = new System.Drawing.Size(121, 21);
+            this.cmbHolTYpe.TabIndex = 14;
+            this.cmbHolTYpe.Text = "Select from Type...";
+            // 
+            // currentDate
+            // 
+            this.currentDate.Location = new System.Drawing.Point(96, 54);
+            this.currentDate.Name = "currentDate";
+            this.currentDate.TabIndex = 1;
+            this.currentDate.Visible = false;
+            this.currentDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.startCal_DateChanged);
+            this.currentDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.startCal_DateSelected);
+            // 
+            // MainSelectionPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 524);
+            this.Controls.Add(this.cmbHolTYpe);
+            this.Controls.Add(this.btnGetPrices);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblNumOfDays);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnExtendedForecast);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblOutboundAirport);
             this.Controls.Add(this.cmbDestPorts);
@@ -1101,9 +1151,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.endCal);
+            this.Controls.Add(this.currentDate);
             this.Controls.Add(this.startCal);
-            this.Name = "Form1";
+            this.Name = "MainSelectionPage";
             this.Text = "Main Selection Page";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1148,8 +1200,12 @@
         private System.Windows.Forms.ComboBox cmbDestPorts;
         private System.Windows.Forms.Label lblOutboundAirport;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnExtendedForecast;
         private System.Windows.Forms.Label lblNumOfDays;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnGetPrices;
+        private System.Windows.Forms.ComboBox cmbHolTYpe;
+        private System.Windows.Forms.MonthCalendar currentDate;
     }
 }
 

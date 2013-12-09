@@ -6,17 +6,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
-
+using System.Threading;
+using System.Xml;
+using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace Holiday_App
 {
-    public partial class Form1 : Form
+    public partial class MainSelectionPage : Form
     {
-        public Form1()
+        populateOutBoundAirport popList = new populateOutBoundAirport();
+        public MainSelectionPage()
         {
             InitializeComponent();
-            populateOutBoundAirport popList = new populateOutBoundAirport();
+           
             
            cmbOutAirport.Items.AddRange(popList.initLists());
            cmbDestPorts.Items.AddRange(popList.initLists());
@@ -275,43 +278,170 @@ namespace Holiday_App
 
         private void startCal_DateChanged(object sender, DateRangeEventArgs e)
         {
-          //  Console.WriteLine(startCal.DateSelected);
+         
             
             dateChanged dtc = new dateChanged();
-            lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
-            
+            if (dtc.isBeforeToday(currentDate.ToString(), startCal.ToString()))
+            {
+                lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
+            }
+            else
+            {
+                lblNumOfDays.Text = ("Out date is before this day");
+
+
+            }
         }
 
         private void endCal_DateChanged(object sender, DateRangeEventArgs e)
         {
             dateChanged dtc = new dateChanged();
-            lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
+            if(dtc.isBeforeToday(currentDate.ToString(),endCal.ToString()))
+            {
+
+
+                lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
+            }
+            else
+            {
+
+                lblNumOfDays.Text = ("Return date is before this day");
+
+            }
         }
 
         private void endCal_DateSelected(object sender, DateRangeEventArgs e)
         {
-            dateChanged dtc = new dateChanged();
-            lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
+           // dateChanged dtc = new dateChanged();
+           // lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
         }
 
         private void startCal_DateSelected(object sender, DateRangeEventArgs e)
         {
-            dateChanged dtc = new dateChanged();
-            lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
+            //dateChanged dtc = new dateChanged();
+           // lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            getWeatherClass gwc = new getWeatherClass();
-            gwc.getWeatherJSON(cmbOutAirport.Text);
-            populateOutBoundAirport popLists = new populateOutBoundAirport();
-            string [] inBoundList = (popLists.updateLists(cmbOutAirport.Text));
+
+            if (cmbOutAirport.Text != ""){
+            string testString = cmbOutAirport.Text;
+            string[] testingString = cmbOutAirport.Text.Split(' ');
+            
+            if (testingString.Length > 1)
+            {
+                testString = cmbOutAirport.Text.Replace(" ", "");
+            }
+
+           
+            string [] inBoundList = (popList.updateLists(testString));
+            cmbDestPorts.Items.Clear();
             cmbDestPorts.Items.AddRange(inBoundList);
+        }
+            else
+            {
+                cmbOutAirport.Items.Clear();
+                cmbDestPorts.Items.Clear();
+                cmbOutAirport.Items.AddRange(popList.initLists());
+                cmbDestPorts.Items.AddRange(popList.initLists());
+            } 
         }
 
         private void cmbDestPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbDestPorts.Text != "")
+            {
+                string inputStr = cmbDestPorts.Text;
+                Thread t = new Thread(() => startHTTPWorker(inputStr));
+                t.Start();
 
+                string[] testingString = cmbDestPorts.Text.Split(' ');
+
+                if (testingString.Length > 1)
+                {
+
+                    MessageBox.Show(" Was great than 1");
+                    inputStr = cmbDestPorts.Text.Replace(" ", "");
+                }
+
+             
+                string[] inBoundList = (popList.updateLists(inputStr));
+                cmbOutAirport.Items.Clear();
+                cmbOutAirport.Items.AddRange(inBoundList);
+            }
+            else if (cmbDestPorts.Text == "")
+            {
+                cmbOutAirport.Items.Clear();
+                cmbDestPorts.Items.Clear();
+                cmbOutAirport.Items.AddRange(popList.initLists());
+                cmbDestPorts.Items.AddRange(popList.initLists());
+
+            }
+        }
+
+        private void startHTTPWorker(string input)
+        {
+            HTTPIO gwc = new HTTPIO();
+            selectWeatherIcon(gwc.getWeatherJSON(input), input);
+
+        }
+
+        private void selectWeatherIcon(string weatherString, string inputStr)
+        {
+            changeWeatherIcon(weatherString, inputStr);
+        }
+
+        private void changeWeatherIcon(string weather, string cityName)
+        {
+
+            
+                MessageBox.Show(weather);
+                
+
+            if (weather == "Clouds")
+            {
+                pictureBox1.ImageLocation = "Assets/WeatherIcons/Clouds.png";
+
+            }
+            else if (weather == "Drizzle")
+            {
+               
+
+
+            }
+            else if (weather == "Rain")
+            {
+
+                pictureBox1.ImageLocation = "Assets/WeatherIcons/drizzleDay.png";
+
+            }
+           
+        }
+
+        private void btnGetPrices_Click(object sender, EventArgs e)
+        {
+            if (cmbDestPorts.Text == "" || cmbOutAirport.Text == "")
+            {
+
+                MessageBox.Show("You've not select two airports ");
+
+            }
+            else if (cmbHolTYpe.Text == "Just Flights")
+            {
+                var form = new Quote();
+
+                form.Show();
+                
+                form.recieveData(cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text);
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            WeatherForecast wfFrm = new WeatherForecast(startCal.ToString(), endCal.ToString(), cmbDestPorts.Text);
+            wfFrm.Show();
         }
     }
 }

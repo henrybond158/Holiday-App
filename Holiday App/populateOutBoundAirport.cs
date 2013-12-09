@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+
 
 namespace Holiday_App
 {
@@ -11,66 +14,88 @@ namespace Holiday_App
 
         public string[] initLists()
         {
-
-            string line1 = "";
-
-            using (StreamReader fileReader = new StreamReader("airportList.txt"))
+            string[] returnString = null;
+            XElement element = XElement.Load("XMLFile1.xml");
+            Console.WriteLine(element.Value);
+            using (XmlReader reader = XmlReader.Create("XMLFile1.xml"))
             {
-                line1 = fileReader.ReadLine();
+                while (reader.Read())
+                {
+                    if (reader.IsStartElement())
+                    {
+                        switch (reader.Name)
+                        {
+                            case "Airports":
 
+                                break;
+                            case "AllAirport":
+                                string attribute = reader["airports"];
+                                if (attribute != null)
+                                {
+
+                                }
+                                if (reader.Read())
+                                {
+
+                                    string returnStringUnp = reader.Value.Trim();
+                                    returnString = returnStringUnp.Split(',');
+                                    return returnString;
+                                }
+                                Console.WriteLine();
+                                break;
+                            default:
+
+                                break;
+                        }
+
+
+
+                    }
+
+
+                }
+                return null;
             }
-            string[] airports = line1.Split(',');
-            
-            return airports;
+
         }
 
-        public string []updateLists(string selected)
+        public string[] updateLists(string selected)
         {
-            int counter = 0;
-            string[] airportList = new string[16];
-            string line;
-
-            using (StreamReader fileReader = new StreamReader("airportList.txt"))
+            string[] returnString = null;
+            XElement element = XElement.Load("XMLFile1.xml");
+            Console.WriteLine(element.Value);
+            using (XmlReader reader = XmlReader.Create("XMLFile1.xml"))
             {
-               while ((line = fileReader.ReadLine()) !=null)
-               {
-                   airportList[counter] = line;
-                   counter++;
-                   
+                while (reader.Read())
+                {
+                    if (reader.IsStartElement())
+                    {
 
-               }
-               fileReader.Close();
-                counter = 0;
-                string output = "";
-               foreach (string str in airportList)
-               {
-                   int index = str.IndexOf(":");
+                        if (selected == reader.Name)
+                        {
+                            string attribute = reader["airports"];
+                            if (attribute != null)
+                            {
 
-                   if (index > 0)
-                        output = str.Substring(0, index);
-                   if (str == selected)
-                   {
-                       
-                      
-                       string[] airportsOutBound = output.Split(',');
-                       return airportsOutBound;
+                            }
+                            if (reader.Read())
+                            {
 
-                   }
+                                string returnStringUnp = reader.Value.Trim();
+                                returnString = returnStringUnp.Split(',');
+                                return returnString;
+                            }
+                            
+                        }
 
-                   else
-                   {
 
-                        counter++;
+                    }
+                    
+                }
 
-                   }
-
-               }
-           
+               
             }
-
-
             return null;
         }
-
     }
 }
