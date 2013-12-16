@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.startCal = new System.Windows.Forms.MonthCalendar();
             this.endCal = new System.Windows.Forms.MonthCalendar();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,6 +72,7 @@
             this.btnGetPrices = new System.Windows.Forms.Button();
             this.cmbHolTYpe = new System.Windows.Forms.ComboBox();
             this.currentDate = new System.Windows.Forms.MonthCalendar();
+            this.tmrISCompleted = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1095,6 +1097,7 @@
             this.cmbHolTYpe.Size = new System.Drawing.Size(121, 21);
             this.cmbHolTYpe.TabIndex = 14;
             this.cmbHolTYpe.Text = "Select from Type...";
+            this.cmbHolTYpe.SelectedIndexChanged += new System.EventHandler(this.cmbHolTYpe_SelectedIndexChanged);
             // 
             // currentDate
             // 
@@ -1104,6 +1107,10 @@
             this.currentDate.Visible = false;
             this.currentDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.startCal_DateChanged);
             this.currentDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.startCal_DateSelected);
+            // 
+            // tmrISCompleted
+            // 
+            this.tmrISCompleted.Tick += new System.EventHandler(this.tmrIsCompleted_Tick);
             // 
             // MainSelectionPage
             // 
@@ -1206,6 +1213,7 @@
         private System.Windows.Forms.Button btnGetPrices;
         private System.Windows.Forms.ComboBox cmbHolTYpe;
         private System.Windows.Forms.MonthCalendar currentDate;
+        private System.Windows.Forms.Timer tmrISCompleted;
     }
 }
 

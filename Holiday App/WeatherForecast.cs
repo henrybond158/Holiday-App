@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -14,105 +15,42 @@ using System.Xml.XPath;
 
 namespace Holiday_App
 {
-    public static class DocumentExtensions
-    {
-        public static XmlDocument ToXmlDocument(this XDocument xDocument)
-        {
-            var xmlDocument = new XmlDocument();
-            using (var xmlReader = xDocument.CreateReader())
-            {
-                xmlDocument.Load(xmlReader);
-            }
-            return xmlDocument;
-        }
-
-        public static XDocument ToXDocument(this XmlDocument xmlDocument)
-        {
-            using (var nodeReader = new XmlNodeReader(xmlDocument))
-            {
-                nodeReader.MoveToContent();
-                return XDocument.Load(nodeReader);
-            }
-        }
-    }
+  
     public partial class WeatherForecast : Form
     {
 
         public WeatherForecast(string startDate, string endDate, string dest)
         {
             InitializeComponent();
-            parseData(dest,startDate);
+            
+            Process.Start("http://www.bbc.co.uk/weather/" + workOut(dest));
+
+           
             
         }
 
 
-
-        private void parseData(string dest,string date)
+        private string workOut(string dest)
         {
-            
 
-           // DateTime firstDateDT = Convert.ToDateTime(firstFixedString[1]);
-           // DateTime.ParseExact(firstFixedString, "yy/MM/dd", CultureInfo.InvariantCulture);
-
-
-            HTTPIO gwc = new HTTPIO();
-            
-            XDocument XMLDoc = gwc.getWeatherForecastXML(dest);
-            XmlDocument xml = XMLDoc.ToXmlDocument();
-            
-
-            IEnumerable att = (IEnumerable)XMLDoc.XPathEvaluate("/weatherdata/forecast/time/@from");
-            Console.WriteLine(att.Cast<XAttribute>().FirstOrDefault());
-            
-            string str = att.Cast<XAttribute>().FirstOrDefault().ToString();
-            string[] returnedString = fixDateString(str, date);
-            
-            if (returnedString[0] == returnedString[1])
+            switch (dest)
             {
-                string nodeString = "/weatherdata/forecast/time/[@from='" + returnedString[0] + "T09:00:00" + "']";
-                XmlNodeList xnl = xml.SelectNodes(nodeString);
+                case "Edinburgh":
+                    return "2650225";
+                case "Budapest":
+                    return "3054643";
+                case "Gatwick":
+                    return "6296598";
+                case "The Hague":
+                    return "2747373";
+                case "Glasgow":
+                    return "2648579";
+                        
+                default:
+                        return null;
+                    
 
             }
-
-
-           richTextBox1.Text = XMLDoc.ToString();
-
-           /* IEnumerable att = (IEnumerable)XMLDoc.XPathEvaluate("/current/weather/@value");
-            Console.WriteLine(att.Cast<XAttribute>().FirstOrDefault());
-            string str = att.Cast<XAttribute>().FirstOrDefault().ToString();
-               
-                */
         }
-        private string[] fixDateString (string firstString, string secondString)
-        {
-
-            string[] firstDateSplit = (secondString.Split(':'));
-            string firstDateFixer = firstDateSplit[2];
-            string[] firstFixedString = firstDateFixer.Split(' ');
-            string[] resultsNonXML = firstString.Split('"');
-            string[] results = firstString.Split('T');
-
-            firstString = results[0];
-            string[] test = firstString.Split('"');
-            test[1] = test[1].Replace('-', '/');
-            string[] arrayDate = test[1].Split('/');
-
-
-            string[] fixedArrayDate = new string[3];
-            fixedArrayDate[0] = arrayDate[2];
-            fixedArrayDate[1] = arrayDate[1];
-            fixedArrayDate[2] = arrayDate[0];
-            string secondFixedString = (fixedArrayDate[0] + "/" + fixedArrayDate[1] + "/" + fixedArrayDate[2]);
-            string[] returnString = { secondFixedString, firstFixedString[1] };
-            
-
-
-            return returnString;
-        }
-       
-
-
-
     }
-   
 }

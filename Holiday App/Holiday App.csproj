@@ -45,6 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dateChanged.cs" />
+    <Compile Include="HolidayTypeClasses\Adventure.cs" />
+    <Compile Include="HolidayTypeClasses\BaseHolidayClass.cs" />
+    <Compile Include="HolidayTypeClasses\Cultral.cs" />
+    <Compile Include="HolidayTypeClasses\JustFlights.cs" />
+    <Compile Include="HolidayTypeClasses\Relax.cs" />
     <Compile Include="MainSelectionPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +65,12 @@
     </Compile>
     <Compile Include="Quote.Designer.cs">
       <DependentUpon>Quote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="staffView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="staffView.Designer.cs">
+      <DependentUpon>staffView.cs</DependentUpon>
     </Compile>
     <Compile Include="WeatherForecast.cs">
       <SubType>Form</SubType>
@@ -81,6 +92,9 @@
     </Compile>
     <EmbeddedResource Include="Quote.resx">
       <DependentUpon>Quote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="staffView.resx">
+      <DependentUpon>staffView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WeatherForecast.resx">
       <DependentUpon>WeatherForecast.cs</DependentUpon>

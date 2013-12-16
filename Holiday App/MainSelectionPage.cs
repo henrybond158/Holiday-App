@@ -10,19 +10,40 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Holiday_App
 {
     public partial class MainSelectionPage : Form
     {
+        string weatherString = "";
         populateOutBoundAirport popList = new populateOutBoundAirport();
         public MainSelectionPage()
         {
             InitializeComponent();
-           
-            
-           cmbOutAirport.Items.AddRange(popList.initLists());
-           cmbDestPorts.Items.AddRange(popList.initLists());
+
+            try
+            {
+                cmbOutAirport.Items.AddRange(popList.initLists());
+                cmbDestPorts.Items.AddRange(popList.initLists());
+            }
+            catch(FileNotFoundException e)
+            {
+                if (File.Exists("error.log"))
+                {
+                    File.AppendAllText("error.log",e.ToString());
+                    MessageBox.Show("File not found, error log has been created, please contact system administrator");
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    File.Create("error.log");
+                    File.AppendAllText("error.log", e.ToString());
+                    MessageBox.Show("File not found, error log has been created, nor has an error log, error log created, please now contact system administrator");
+                    Environment.Exit(0);
+                }
+               
+            }
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -32,8 +53,8 @@ namespace Holiday_App
 
         private void cmbPassangers_TextChanged(object sender, EventArgs e)
         {
-            
-            switch(int.Parse(cmbPassangers.Text))
+
+            switch (int.Parse(cmbPassangers.Text))
             {
                 case 0:
                     txtFN0.Enabled = false;
@@ -62,7 +83,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 1:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = false;
                     txtFN2.Enabled = false;
                     txtFN3.Enabled = false;
@@ -88,7 +109,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 2:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = true;
                     txtFN2.Enabled = false;
                     txtFN3.Enabled = false;
@@ -114,7 +135,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 3:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = true;
                     txtFN2.Enabled = true;
                     txtFN3.Enabled = false;
@@ -140,7 +161,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 4:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = true;
                     txtFN2.Enabled = true;
                     txtFN3.Enabled = true;
@@ -166,7 +187,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 5:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = true;
                     txtFN2.Enabled = true;
                     txtFN3.Enabled = true;
@@ -181,7 +202,7 @@ namespace Holiday_App
                     txtLN4.Enabled = true;
                     txtLN5.Enabled = false;
                     txtLN6.Enabled = false;
-                    txtLN7.Enabled = false;cmbAge0.Enabled = false;
+                    txtLN7.Enabled = false; cmbAge0.Enabled = false;
                     cmbAge1.Enabled = true;
                     cmbAge2.Enabled = true;
                     cmbAge3.Enabled = true;
@@ -191,7 +212,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 6:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = true;
                     txtFN2.Enabled = true;
                     txtFN3.Enabled = true;
@@ -217,7 +238,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 7:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = true;
                     txtFN2.Enabled = true;
                     txtFN3.Enabled = true;
@@ -243,7 +264,7 @@ namespace Holiday_App
                     cmbAge7.Enabled = false;
                     break;
                 case 8:
-                     txtFN0.Enabled = true;
+                    txtFN0.Enabled = true;
                     txtFN1.Enabled = true;
                     txtFN2.Enabled = true;
                     txtFN3.Enabled = true;
@@ -259,7 +280,7 @@ namespace Holiday_App
                     txtLN5.Enabled = true;
                     txtLN6.Enabled = true;
                     txtLN7.Enabled = true;
-                     cmbAge0.Enabled = true;
+                    cmbAge0.Enabled = true;
                     cmbAge1.Enabled = true;
                     cmbAge2.Enabled = true;
                     cmbAge3.Enabled = true;
@@ -272,14 +293,14 @@ namespace Holiday_App
                     break;
 
             }
-            
+
             MessageBox.Show("Box was changed");
         }
 
         private void startCal_DateChanged(object sender, DateRangeEventArgs e)
         {
-         
-            
+
+
             dateChanged dtc = new dateChanged();
             if (dtc.isBeforeToday(currentDate.ToString(), startCal.ToString()))
             {
@@ -296,7 +317,7 @@ namespace Holiday_App
         private void endCal_DateChanged(object sender, DateRangeEventArgs e)
         {
             dateChanged dtc = new dateChanged();
-            if(dtc.isBeforeToday(currentDate.ToString(),endCal.ToString()))
+            if (dtc.isBeforeToday(currentDate.ToString(), endCal.ToString()))
             {
 
 
@@ -312,40 +333,41 @@ namespace Holiday_App
 
         private void endCal_DateSelected(object sender, DateRangeEventArgs e)
         {
-           // dateChanged dtc = new dateChanged();
-           // lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
+            // dateChanged dtc = new dateChanged();
+            // lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
         }
 
         private void startCal_DateSelected(object sender, DateRangeEventArgs e)
         {
             //dateChanged dtc = new dateChanged();
-           // lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
+            // lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (cmbOutAirport.Text != ""){
-            string testString = cmbOutAirport.Text;
-            string[] testingString = cmbOutAirport.Text.Split(' ');
-            
-            if (testingString.Length > 1)
+            if (cmbOutAirport.Text != "")
             {
-                testString = cmbOutAirport.Text.Replace(" ", "");
-            }
+                string testString = cmbOutAirport.Text;
+                string[] testingString = cmbOutAirport.Text.Split(' ');
 
-           
-            string [] inBoundList = (popList.updateLists(testString));
-            cmbDestPorts.Items.Clear();
-            cmbDestPorts.Items.AddRange(inBoundList);
-        }
+                if (testingString.Length > 1)
+                {
+                    testString = cmbOutAirport.Text.Replace(" ", "");
+                }
+
+
+                string[] inBoundList = (popList.updateLists(testString));
+                cmbDestPorts.Items.Clear();
+                cmbDestPorts.Items.AddRange(inBoundList);
+            }
             else
             {
                 cmbOutAirport.Items.Clear();
                 cmbDestPorts.Items.Clear();
                 cmbOutAirport.Items.AddRange(popList.initLists());
                 cmbDestPorts.Items.AddRange(popList.initLists());
-            } 
+            }
         }
 
         private void cmbDestPorts_SelectedIndexChanged(object sender, EventArgs e)
@@ -361,11 +383,11 @@ namespace Holiday_App
                 if (testingString.Length > 1)
                 {
 
-                    MessageBox.Show(" Was great than 1");
+                    //MessageBox.Show(" Was great than 1");
                     inputStr = cmbDestPorts.Text.Replace(" ", "");
                 }
 
-             
+
                 string[] inBoundList = (popList.updateLists(inputStr));
                 cmbOutAirport.Items.Clear();
                 cmbOutAirport.Items.AddRange(inBoundList);
@@ -395,28 +417,38 @@ namespace Holiday_App
         private void changeWeatherIcon(string weather, string cityName)
         {
 
-            
-                MessageBox.Show(weather);
-                
+
+            MessageBox.Show(weather);
+
 
             if (weather == "Clouds")
             {
-                pictureBox1.ImageLocation = "Assets/WeatherIcons/Clouds.png";
+                weatherString = "Assets/WeatherIcons/Clouds.png";
 
             }
             else if (weather == "Drizzle")
             {
-               
+
 
 
             }
             else if (weather == "Rain")
             {
 
-                pictureBox1.ImageLocation = "Assets/WeatherIcons/drizzleDay.png";
+                weatherString = "Assets/WeatherIcons/drizzleDay.png";
 
             }
-           
+            else if (weather == "Scattered Clouds")
+            {
+
+
+            }
+            else if (weather == "Sky Is Clear")
+            {
+
+
+            }
+
         }
 
         private void btnGetPrices_Click(object sender, EventArgs e)
@@ -427,13 +459,12 @@ namespace Holiday_App
                 MessageBox.Show("You've not select two airports ");
 
             }
-            else if (cmbHolTYpe.Text == "Just Flights")
+            else if (cmbHolTYpe.Text != "Select from Type...")
             {
-                var form = new Quote();
+                var form = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text);
 
                 form.Show();
-                
-                form.recieveData(cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text);
+
             }
 
         }
@@ -441,7 +472,24 @@ namespace Holiday_App
         private void button1_Click(object sender, EventArgs e)
         {
             WeatherForecast wfFrm = new WeatherForecast(startCal.ToString(), endCal.ToString(), cmbDestPorts.Text);
-            wfFrm.Show();
+          
         }
+
+        private void tmrIsCompleted_Tick(object sender, EventArgs e)
+        {
+            if (weatherString != "")
+            {
+                tmrISCompleted.Enabled = false;
+
+                pictureBox1.ImageLocation = weatherString;
+            }
+        }
+
+        private void cmbHolTYpe_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

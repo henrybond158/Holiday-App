@@ -21,25 +21,53 @@ namespace Holiday_App
         double distance;
         double price;
         int numberOfPassangers;
-        public Quote()
+        public Quote(string holidayType, string testString, string inputAirport, string DestAirport)
         {
             InitializeComponent();
-            
-        }
 
-        private void Quote_Load(object sender, EventArgs e)
-        {
-
-        }
-        public void recieveData(string testString, string inputAirport, string DestAirport)
-        {
+            callClass(holidayType);
             lblResults.Text = testString;
             numberOfPassangers = int.Parse(testString);
             Thread t = new Thread(() => getPrice(inputAirport, DestAirport));
             t.Start();
-           
+       
+            
+        }
+        private void callClass(string holType)
+        {
+
+
+            switch (holType)
+            {
+
+                case "Just Flights":
+                    HolidayTypeClasses.JustFlights holiday = new HolidayTypeClasses.JustFlights(numberOfPassangers,false);
+                    break;
+                case "Relax":
+                    MessageBox.Show("relax");
+                    break;
+                case "Adventure":
+                    MessageBox.Show("Adventure");
+                    break;
+                case "Cultural":
+                    MessageBox.Show("Cultraul");
+                    break;
+
+                default:
+                    MessageBox.Show("something went wrong");
+                    break;
+                // Just Flights
+                //Relax
+                //Cultural
+                //Adventure
+            }
 
         }
+        private void Quote_Load(object sender, EventArgs e)
+        {
+
+        }
+       
 
         private void getPrice(string inputAirport, string destAirport)
         {
@@ -109,5 +137,7 @@ namespace Holiday_App
 
             }
         }
+
+        
     }
 }

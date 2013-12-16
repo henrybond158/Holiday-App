@@ -59,22 +59,6 @@ namespace Holiday_App
 
 
         }
-        public XDocument getWeatherForecastXML(string location)
-        {
-
-            HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create("http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&mode=xml");
-            HttpWebResponse response = (HttpWebResponse)httpReq.GetResponse();
-            Stream readStream = response.GetResponseStream();
-            StreamReader streamreader = new StreamReader(readStream, Encoding.UTF8);
-            string responseString = streamreader.ReadToEnd();
-
-
-            XDocument XMLDoc = XDocument.Parse(responseString);
-
-
-            return XMLDoc;
-
-        }
 
         public double getDistance(string start, string end)
         {
