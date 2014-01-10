@@ -41,7 +41,7 @@ namespace Holiday_App
 
         public WeatherForecast(string startDate, string endDate, string dest)
         {
-            InitializeComponent();
+        
             
             Process.Start("http://www.bbc.co.uk/weather/" + workOut(dest));
 

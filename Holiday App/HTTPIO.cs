@@ -8,9 +8,9 @@
  *  (at your option) any later version.                                         *
  *                                                                              *
  *  My Holiday planning coursework app is distributed in the hope               *
- *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                *
+ *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.             *
- * See the GNU General Public License for more details.                         *         *
+ * See the GNU General Public License for more details.                         *         
  *                                                                              *
  * You should have received a copy of the GNU General Public License            *
  * along with  My Holiday planning coursework app.                              *

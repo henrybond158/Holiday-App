@@ -8,9 +8,9 @@
  *  (at your option) any later version.                                         *
  *                                                                              *
  *  My Holiday planning coursework app is distributed in the hope               *
- *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                *
+ *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.             *
- * See the GNU General Public License for more details.                         *         *
+ * See the GNU General Public License for more details.                         *         
  *                                                                              *
  * You should have received a copy of the GNU General Public License            *
  * along with  My Holiday planning coursework app.                              *
@@ -27,6 +27,7 @@ namespace Holiday_App.HolidayTypeClasses
 {
     class Relax : BaseHolidayClass
     {
+        public string[] initFormReturn = new string[6];
 
         
            public Relax(int numberOfPassangers, bool firstClass) 
@@ -34,8 +35,22 @@ namespace Holiday_App.HolidayTypeClasses
            numberOfCustomers = numberOfPassangers;
            hotelRequired = true;
            extrasIncluded = 1;
-            
+           
 
        }
+
+           public string[] initForm(int i)
+           {
+
+
+
+               initFormReturn[0] = "Beach Towels";
+               initFormReturn[1] = "Sun Cream";
+               initFormReturn[2] = "Sun Loungers";
+               initFormReturn[3] = "Guide Book";
+               initFormReturn[4] = "Phrase Book";
+               initFormReturn[5] = "You have select package for relaxation";
+               return initFormReturn;
+           }
     }
 }

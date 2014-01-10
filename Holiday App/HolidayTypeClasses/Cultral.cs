@@ -27,15 +27,29 @@ namespace Holiday_App.HolidayTypeClasses
 {
     class Cultral : BaseHolidayClass
     {
-
+        public string[] initFormReturn = new string[6];
 
         public Cultral(int numberOfPassangers, bool firstClass) 
        {
            numberOfCustomers = numberOfPassangers;
            hotelRequired = true;
            extrasIncluded = 1;
-            
-
+           
+          
        }
+
+        public string[] initForm(int i)
+        {
+
+
+
+            initFormReturn[0] = "Bus Tour";
+            initFormReturn[1] = "Hire Car";
+            initFormReturn[2] = "Tour Guide";
+            initFormReturn[3] = "Guide Book";
+            initFormReturn[4] = "Phrase Book";
+            initFormReturn[5] = "You have select package for cultural";
+            return initFormReturn;
+        }
     }
 }

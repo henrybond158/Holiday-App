@@ -8,9 +8,9 @@
  *  (at your option) any later version.                                         *
  *                                                                              *
  *  My Holiday planning coursework app is distributed in the hope               *
- *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                *
+ *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.             *
- * See the GNU General Public License for more details.                         *         *
+ * See the GNU General Public License for more details.                         *         
  *                                                                              *
  * You should have received a copy of the GNU General Public License            *
  * along with  My Holiday planning coursework app.                              *
@@ -37,7 +37,8 @@ namespace Holiday_App
 {
     public partial class MainSelectionPage : Form
     {
-        string weatherString = "";
+        string weatherString = ""; // declares a string for use in deciding what weather icon is to be used
+        // declares an object to populate the airport selection lists
         populateOutBoundAirport popList = new populateOutBoundAirport();
         public MainSelectionPage()
         {
@@ -45,26 +46,27 @@ namespace Holiday_App
 
             try
             {
-                cmbOutAirport.Items.AddRange(popList.initLists());
-                cmbDestPorts.Items.AddRange(popList.initLists());
+                cmbOutAirport.Items.AddRange(popList.initLists()); // calls the function  which populates the list of outbound airports
+                cmbDestPorts.Items.AddRange(popList.initLists()); // calls the function which populates the list of inbound airports
             }
-            catch(FileNotFoundException e)
+            catch(FileNotFoundException e) // if the file is not found, this expection is thrown and calls this
             {
-                if (File.Exists("error.log"))
+                if (File.Exists("error.log")) // checks to see if an error.log file already exists
                 {
-                    File.AppendAllText("error.log",e.ToString());
+                    File.AppendAllText("error.log",e.ToString()); // if it does, it appends the file, adding the exception that is thrown and sends a message saying to contact admin
                     MessageBox.Show("File not found, error log has been created, please contact system administrator");
-                    Environment.Exit(0);
+                    Environment.Exit(0); // and quits the program
                 }
-                else
+                else // if it is not found, it creates it then adds the data to the file
                 {
                     File.Create("error.log");
                     File.AppendAllText("error.log", e.ToString());
                     MessageBox.Show("File not found, error log has been created, nor has an error log, error log created, please now contact system administrator");
-                    Environment.Exit(0);
+                    Environment.Exit(0); // and quits the program
                 }
                
             }
+            this.ControlBox = false; // this removes the close button as hitting the close button causes conflicts with other parts of the program
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -74,6 +76,7 @@ namespace Holiday_App
 
         private void cmbPassangers_TextChanged(object sender, EventArgs e)
         {
+            // this switch statement changes the enabled text boxes based on the number of passangers selected
 
             switch (int.Parse(cmbPassangers.Text))
             {
@@ -223,7 +226,8 @@ namespace Holiday_App
                     txtLN4.Enabled = true;
                     txtLN5.Enabled = false;
                     txtLN6.Enabled = false;
-                    txtLN7.Enabled = false; cmbAge0.Enabled = false;
+                    txtLN7.Enabled = false; 
+                    cmbAge0.Enabled = true;
                     cmbAge1.Enabled = true;
                     cmbAge2.Enabled = true;
                     cmbAge3.Enabled = true;
@@ -313,17 +317,15 @@ namespace Holiday_App
                 default:
                     break;
 
-            }
-
-            MessageBox.Show("Box was changed");
+            } 
         }
 
         private void startCal_DateChanged(object sender, DateRangeEventArgs e)
         {
+            // this checks the dates selected is valid and calcualtes the number of days the stay is for
 
-
-            dateChanged dtc = new dateChanged();
-            if (dtc.isBeforeToday(currentDate.ToString(), startCal.ToString()))
+            dateChanged dtc = new dateChanged(); // declares an object of class data changed
+            if (dtc.isBeforeToday(currentDate.ToString(), startCal.ToString())) // calls function isBeforeToday which returns to see if the date is before today
             {
                 lblNumOfDays.Text = (dtc.calculateLength(startCal.ToString(), endCal.ToString()));
             }
@@ -337,6 +339,8 @@ namespace Holiday_App
 
         private void endCal_DateChanged(object sender, DateRangeEventArgs e)
         {
+            // this checks the dates selected is valid and calcualtes the number of days the stay is for
+
             dateChanged dtc = new dateChanged();
             if (dtc.isBeforeToday(currentDate.ToString(), endCal.ToString()))
             {
@@ -366,9 +370,11 @@ namespace Holiday_App
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //  this changes the inbound airport list depending on what is selected
 
-            if (cmbOutAirport.Text != "")
+            if (cmbOutAirport.Text != "") // if the select airport is not blank this block is selected
             {
+                // checks to see if there any spaces in the name, and removes them
                 string testString = cmbOutAirport.Text;
                 string[] testingString = cmbOutAirport.Text.Split(' ');
 
@@ -377,12 +383,12 @@ namespace Holiday_App
                     testString = cmbOutAirport.Text.Replace(" ", "");
                 }
 
-
+                // populates the outbound airport with the contents of the xml node releating to what was entered
                 string[] inBoundList = (popList.updateLists(testString));
                 cmbDestPorts.Items.Clear();
                 cmbDestPorts.Items.AddRange(inBoundList);
             }
-            else
+            else // if the selected outbound airport was a blank field,  both inbound and outbound will be populated with the full list of airport
             {
                 cmbOutAirport.Items.Clear();
                 cmbDestPorts.Items.Clear();
@@ -393,18 +399,16 @@ namespace Holiday_App
 
         private void cmbDestPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbDestPorts.Text != "")
+            if (cmbDestPorts.Text != "") // the same as above but with an extra function to get the weather at the destintation airport
             {
                 string inputStr = cmbDestPorts.Text;
-                Thread t = new Thread(() => startHTTPWorker(inputStr));
-                t.Start();
+                Thread t = new Thread(() => startHTTPWorker(inputStr)); // this starts a new thread to stop any program holds which gets the weather data for the destination airport
+                t.Start(); // this starts the new thread exectuing
 
-                string[] testingString = cmbDestPorts.Text.Split(' ');
+                string[] testingString = cmbDestPorts.Text.Split(' '); // same as the above function
 
                 if (testingString.Length > 1)
                 {
-
-                    //MessageBox.Show(" Was great than 1");
                     inputStr = cmbDestPorts.Text.Replace(" ", "");
                 }
 
@@ -423,19 +427,14 @@ namespace Holiday_App
             }
         }
 
-        private void startHTTPWorker(string input)
+        private void startHTTPWorker(string input) // this is the function which is started by the new thread
         {
-            HTTPIO gwc = new HTTPIO();
-            selectWeatherIcon(gwc.getWeatherJSON(input), input);
+            HTTPIO gwc = new HTTPIO(); // creates object of class HTTPIO which handles all internet operations
+            changeWeatherIcon((gwc.getWeatherJSON(input)), input); // starts the function selectWeatherIcon with the returned data of of the HTTPIO class
 
         }
 
-        private void selectWeatherIcon(string weatherString, string inputStr)
-        {
-            changeWeatherIcon(weatherString, inputStr);
-        }
-
-        private void changeWeatherIcon(string weather, string cityName)
+       private void changeWeatherIcon(string weather, string cityName) // this class changes the weather icon depending on the returned string from the HTTPIO class
         {
 
 
@@ -459,7 +458,7 @@ namespace Holiday_App
                 weatherString = "Assets/WeatherIcons/drizzleDay.png";
 
             }
-            else if (weather == "Scattered Clouds")
+            else if (weather == "Few Clouds")
             {
 
 
@@ -471,32 +470,114 @@ namespace Holiday_App
             }
 
         }
-
-        private void btnGetPrices_Click(object sender, EventArgs e)
+        private string[] createNameList() // this method bundles the data correctly for sending to the Quote Page so that an invoice can be created 
         {
-            if (cmbDestPorts.Text == "" || cmbOutAirport.Text == "")
+
+            switch (int.Parse(cmbPassangers.Text)) // the case be selected depending on number of passangers selected
             {
 
-                MessageBox.Show("You've not select two airports ");
+                case 0:
 
+                    break;
+                case 1:
+
+                    string[] names1 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text}; // delcares an array with the contents of the required firstname, last name and age boxes
+                    Quote form1 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names1); // creates an object of the new form, passing the constructor the required data
+
+                    form1.Show(); // calls the method which displays the new form object on the screen
+                    
+
+                    break;
+                case 2: // and so on
+                    string[] names2 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text};
+                     Quote form2 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names2);
+
+                    form2.Show();
+                    break;
+                case 3:
+                    string[] names3 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text };
+                     Quote form3 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names3);
+
+                    form3.Show();
+
+                    break;
+                case 4:
+                    string[] names4 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text, txtLN3.Text, cmbAge3.Text };
+                     Quote form4 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names4);
+
+                    form4.Show();
+
+                    break;
+                case 5:
+                    string[] names5 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text, txtLN3.Text, cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text };
+                     Quote form5 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names5);
+
+                    form5.Show();
+
+                    break;
+                case 6:
+                    string[] names6 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text,txtLN3.Text,cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text, 
+                                            txtFN5.Text, txtLN5.Text, cmbAge5.Text};
+                     Quote form6 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names6);
+
+                    form6.Show();
+
+
+                    break;
+                case 7:
+                    string[] names7 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text,txtLN3.Text,cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text, 
+                                            txtFN5.Text, txtLN5.Text, cmbAge5.Text, txtFN6.Text, txtLN6.Text, cmbAge6.Text};
+                     Quote form7 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names7);
+
+                    form7.Show();
+
+                  break;
+                case 8:
+                  string[] names8 = { txtFN0.Text, txtLN1.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text, txtLN3.Text, cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text, 
+                                            txtFN5.Text, txtLN5.Text, cmbAge5.Text, txtFN6.Text, txtLN6.Text, cmbAge6.Text, txtFN7.Text, txtLN7.Text, cmbAge7.Text};
+
+                  Quote form8 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names8);
+
+                    form8.Show();
+
+                    break;
+                default:
+                    break;
             }
-            else if (cmbHolTYpe.Text != "Select from Type...")
+
+            return null;
+        }
+        private void btnGetPrices_Click(object sender, EventArgs e) // this method is called when the button to get prices is clicked
+        {
+            if (cmbDestPorts.Text == "" || cmbOutAirport.Text == "") // checks that two airports are selected
             {
-                var form = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text);
 
-                form.Show();
+                MessageBox.Show("You've not select two airports "); // displays message to user if they are not
 
             }
+            else if (cmbHolTYpe.Text == "Select from Type...") // if there was not a type of holiday selected, this will be called
+            {
+
+                MessageBox.Show("You have not select type of holiday"); // display message to user
+
+
+
+            }
+            else if (cmbHolTYpe.Text != "Select from Type...") // if all is correct
+            {
+                createNameList(); // calls the function which bundles the name data for sending to the quotes page
+
+            }   
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            WeatherForecast wfFrm = new WeatherForecast(startCal.ToString(), endCal.ToString(), cmbDestPorts.Text);
+            WeatherForecast wfFrm = new WeatherForecast(startCal.ToString(), endCal.ToString(), cmbDestPorts.Text); // creates a weather forecast class passing data to it's constructor, to open full weather forecast
           
         }
 
-        private void tmrIsCompleted_Tick(object sender, EventArgs e)
+        private void tmrIsCompleted_Tick(object sender, EventArgs e) // timer checks weather the thread has completed to change the contents of the picutre box to the weather icon
         {
             if (weatherString != "")
             {
@@ -509,6 +590,24 @@ namespace Holiday_App
         private void cmbHolTYpe_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e) // opens up the administration form and hides the current one
+        {
+            adminForm frm = new adminForm();
+
+            frm.Show();
+            this.Hide();
+        }
+
+        private void cmbPassangers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e) // closes the form if the exit button is clicked
+        {
+            Environment.Exit(0);
         }
 
 

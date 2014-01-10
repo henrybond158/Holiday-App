@@ -73,6 +73,10 @@
             this.cmbHolTYpe = new System.Windows.Forms.ComboBox();
             this.currentDate = new System.Windows.Forms.MonthCalendar();
             this.tmrISCompleted = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.chkFC = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,6 +131,7 @@
             this.cmbPassangers.Size = new System.Drawing.Size(121, 21);
             this.cmbPassangers.TabIndex = 3;
             this.cmbPassangers.Text = "1";
+            this.cmbPassangers.SelectedIndexChanged += new System.EventHandler(this.cmbPassangers_SelectedIndexChanged);
             this.cmbPassangers.TextChanged += new System.EventHandler(this.cmbPassangers_TextChanged);
             // 
             // label3
@@ -1092,7 +1097,7 @@
             "Relax",
             "Cultural",
             "Adventure"});
-            this.cmbHolTYpe.Location = new System.Drawing.Point(15, 13);
+            this.cmbHolTYpe.Location = new System.Drawing.Point(350, 203);
             this.cmbHolTYpe.Name = "cmbHolTYpe";
             this.cmbHolTYpe.Size = new System.Drawing.Size(121, 21);
             this.cmbHolTYpe.TabIndex = 14;
@@ -1101,7 +1106,7 @@
             // 
             // currentDate
             // 
-            this.currentDate.Location = new System.Drawing.Point(96, 54);
+            this.currentDate.Location = new System.Drawing.Point(79, 54);
             this.currentDate.Name = "currentDate";
             this.currentDate.TabIndex = 1;
             this.currentDate.Visible = false;
@@ -1112,11 +1117,54 @@
             // 
             this.tmrISCompleted.Tick += new System.EventHandler(this.tmrIsCompleted_Tick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(798, 488);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Admin";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // chkFC
+            // 
+            this.chkFC.AutoSize = true;
+            this.chkFC.Location = new System.Drawing.Point(319, 378);
+            this.chkFC.Name = "chkFC";
+            this.chkFC.Size = new System.Drawing.Size(73, 17);
+            this.chkFC.TabIndex = 16;
+            this.chkFC.Text = "First Class";
+            this.chkFC.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(350, 184);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(81, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Type of Holiday";
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(798, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 39);
+            this.btnClose.TabIndex = 18;
+            this.btnClose.Text = "Exit";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // MainSelectionPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 524);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.chkFC);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.cmbHolTYpe);
             this.Controls.Add(this.btnGetPrices);
             this.Controls.Add(this.pictureBox1);
@@ -1214,6 +1262,10 @@
         private System.Windows.Forms.ComboBox cmbHolTYpe;
         private System.Windows.Forms.MonthCalendar currentDate;
         private System.Windows.Forms.Timer tmrISCompleted;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox chkFC;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnClose;
     }
 }
 

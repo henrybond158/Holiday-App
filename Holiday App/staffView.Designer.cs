@@ -39,6 +39,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lblProfit = new System.Windows.Forms.Label();
             this.btnInvoice = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +82,7 @@
             // lblTotalPrice
             // 
             this.lblTotalPrice.AutoSize = true;
-            this.lblTotalPrice.Location = new System.Drawing.Point(109, 32);
+            this.lblTotalPrice.Location = new System.Drawing.Point(137, 32);
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(13, 13);
             this.lblTotalPrice.TabIndex = 4;
@@ -89,7 +91,7 @@
             // lblFlights
             // 
             this.lblFlights.AutoSize = true;
-            this.lblFlights.Location = new System.Drawing.Point(109, 53);
+            this.lblFlights.Location = new System.Drawing.Point(137, 53);
             this.lblFlights.Name = "lblFlights";
             this.lblFlights.Size = new System.Drawing.Size(13, 13);
             this.lblFlights.TabIndex = 5;
@@ -98,7 +100,7 @@
             // lblHotels
             // 
             this.lblHotels.AutoSize = true;
-            this.lblHotels.Location = new System.Drawing.Point(109, 75);
+            this.lblHotels.Location = new System.Drawing.Point(137, 75);
             this.lblHotels.Name = "lblHotels";
             this.lblHotels.Size = new System.Drawing.Size(13, 13);
             this.lblHotels.TabIndex = 6;
@@ -107,7 +109,7 @@
             // lblExtras
             // 
             this.lblExtras.AutoSize = true;
-            this.lblExtras.Location = new System.Drawing.Point(109, 97);
+            this.lblExtras.Location = new System.Drawing.Point(137, 97);
             this.lblExtras.Name = "lblExtras";
             this.lblExtras.Size = new System.Drawing.Size(13, 13);
             this.lblExtras.TabIndex = 7;
@@ -125,11 +127,12 @@
             // lblProfit
             // 
             this.lblProfit.AutoSize = true;
-            this.lblProfit.Location = new System.Drawing.Point(109, 122);
+            this.lblProfit.Location = new System.Drawing.Point(137, 122);
             this.lblProfit.Name = "lblProfit";
             this.lblProfit.Size = new System.Drawing.Size(13, 13);
             this.lblProfit.TabIndex = 9;
             this.lblProfit.Text = "0";
+            this.lblProfit.Click += new System.EventHandler(this.lblProfit_Click);
             // 
             // btnInvoice
             // 
@@ -139,13 +142,35 @@
             this.btnInvoice.TabIndex = 10;
             this.btnInvoice.Text = "Create Invoice";
             this.btnInvoice.UseVisualStyleBackColor = true;
+            this.btnInvoice.Click += new System.EventHandler(this.btnInvoice_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(36, 144);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "First Class Premium:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(137, 144);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "0";
+            this.label6.Click += new System.EventHandler(this.lblProfit_Click);
             // 
             // staffView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(200, 236);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnInvoice);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.lblProfit);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lblExtras);
@@ -176,5 +201,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblProfit;
         private System.Windows.Forms.Button btnInvoice;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

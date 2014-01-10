@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="adminForm.Designer.cs">
+      <DependentUpon>adminForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dateChanged.cs" />
     <Compile Include="HolidayTypeClasses\Adventure.cs" />
     <Compile Include="HolidayTypeClasses\BaseHolidayClass.cs" />
@@ -78,6 +84,9 @@
     <Compile Include="WeatherForecast.Designer.cs">
       <DependentUpon>WeatherForecast.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="adminForm.resx">
+      <DependentUpon>adminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainSelectionPage.resx">
       <DependentUpon>MainSelectionPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -99,6 +108,7 @@
     <EmbeddedResource Include="WeatherForecast.resx">
       <DependentUpon>WeatherForecast.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -115,7 +125,9 @@
     <Content Include="WeatherIcons\drizzleDay.png" />
     <Content Include="WeatherIcons\RainNight.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="External Libraries\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
