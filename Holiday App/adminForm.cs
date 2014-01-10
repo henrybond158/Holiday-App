@@ -13,12 +13,12 @@ namespace Holiday_App
 {
     public partial class adminForm : Form
     {
-        populateOutBoundAirport pop = new populateOutBoundAirport();
+        populateOutBoundAirport pop = new populateOutBoundAirport(); // creates object of class populateOutBoundAirport
 
-        public adminForm()
+        public adminForm() // the constrctur
         {
             InitializeComponent();
-            string[] array = pop.initLists();
+            string[] array = pop.initLists(); // creates an array from the method initLists in class populate... which creates an array of all the airports
 
             foreach (string str in array)
             {
@@ -30,7 +30,7 @@ namespace Holiday_App
             
            
         }
-        static string ConvertStringArrayToString(string[] array)
+        static string ConvertStringArrayToString(string[] array) // this is a function which changes an array to a string
         {
             //
             // Concatenate all the elements into a StringBuilder.
@@ -55,28 +55,28 @@ namespace Holiday_App
         private void btnAddPort_Click(object sender, EventArgs e)
         {
 
-            String[] filleary = new String[listBoxAirAdd.SelectedItems.Count];
+            String[] filleary = new String[listBoxAirAdd.SelectedItems.Count]; // creates string array as long as their are many in the listbox
 
-            for (int index = 0; index < listBoxAirAdd.SelectedItems.Count; index++)
+            for (int index = 0; index < listBoxAirAdd.SelectedItems.Count; index++) //adds items to the array
             {
                 filleary[index] = Convert.ToString(listBoxAirAdd.SelectedItems[index]);
             }
 
-            string outAirports = ConvertStringArrayToString(filleary);
+            string outAirports = ConvertStringArrayToString(filleary); // converts the array of strings to a single array
             
-                string path = "XMLFile1.xml";
+                string path = "XMLFile1.xml"; // sets up the path
                 string test;
-            StringWriter stringWriter = new StringWriter();
-                XmlTextWriter writer = new XmlTextWriter(stringWriter);
-                writer.WriteStartElement(txtBoxAirport.Text);
+            StringWriter stringWriter = new StringWriter(); // creates object of class string writer
+                XmlTextWriter writer = new XmlTextWriter(stringWriter); // and of xmltextwriter
+                writer.WriteStartElement(txtBoxAirport.Text); // generates the new xml node
                 writer.WriteString("," + outAirports);
                 writer.WriteEndElement();
-                string[] myArray = File.ReadAllLines(path);
-                test = stringWriter.ToString();
-                int index0 = myArray.GetLength(0);
-                myArray[index0 - 1] = test;
-                File.WriteAllLines(path, myArray);
-                File.AppendAllText(path, "</Airports>");
+                string[] myArray = File.ReadAllLines(path); // reads all lines into the array
+                test = stringWriter.ToString(); // passes the new xml from the xmltextwriter to a string
+                int index0 = myArray.GetLength(0); // creates an int with the length of the array
+                myArray[index0 - 1] = test; // sets the last but one in the array to be the newly built xml tag
+                File.WriteAllLines(path, myArray); //writes that to the file
+                File.AppendAllText(path, "</Airports>"); // appends the text with the closing tag
                 /*StreamWriter str = new StreamWriter(path);
                 str.WriteLine("</Airports>");
             str.app

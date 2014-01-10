@@ -65,22 +65,21 @@ namespace Holiday_App
             {
 
                 case "Just Flights": // if just flights, the just flights class is called
-                    HolidayTypeClasses.JustFlights holiday = new HolidayTypeClasses.JustFlights(numberOfPassangers,false);
+                    HolidayTypeClasses.JustFlights holiday = new HolidayTypeClasses.JustFlights();
                     cbHotelReq.Enabled = false; // disables the check boxes as only flights selected
-                    cbOption1.Text = "Only flights selected"; // fills with appropriate text
-                    cbOption1.Enabled = false;
-                    cbOption2.Text = "Only flights selected";
-                    cbOption2.Enabled = false;
-                    cbOption3.Text = "Only flights selected";
-                    cbOption3.Enabled = false;
-                    cbOption4.Text = "Only flights selected";
-                    cbOption4.Enabled = false;
-                    cbHotelReq.Text = "Only flights selected";
+                    returnData = holiday.initForm(); // calls method initForm which returns the data to fill out the quote form
+
+                    cbOption1.Text = returnData[0]; // sets the return data to form items
+                    cbOption2.Text = returnData[1];
+                    cbOption3.Text = returnData[2];
+                    cbOption3.Text = returnData[3];
+                    cbOption4.Text = returnData[4];
+                    lblHolType.Text = returnData[5];
                     break;
                 case "Relax": // if relax holiday is selected, this executes
-                    HolidayTypeClasses.Relax relaxHoliday = new HolidayTypeClasses.Relax(numberOfPassangers, false); // declares class relax and sends it constructor data
+                    HolidayTypeClasses.Relax relaxHoliday = new HolidayTypeClasses.Relax(); // declares class relax and sends it constructor data
                     cbHotelReq.Text = "Hotel Required";
-                    returnData = relaxHoliday.initForm(1); // calls method initForm which returns the data to fill out the quote form
+                    returnData = relaxHoliday.initForm(); // calls method initForm which returns the data to fill out the quote form
 
                     cbOption1.Text = returnData[0]; // sets the return data to form items
                     cbOption2.Text = returnData[1];
@@ -90,9 +89,9 @@ namespace Holiday_App
                     lblHolType.Text = returnData[5];
                     break;
                 case "Adventure": // same as above
-                    HolidayTypeClasses.Relax adveHoliday = new HolidayTypeClasses.Relax(numberOfPassangers, false);
+                    HolidayTypeClasses.Adventure adveHoliday = new HolidayTypeClasses.Adventure();
                     cbHotelReq.Text = "Hotel Required";
-                    returnData = adveHoliday.initForm(1);
+                    returnData = adveHoliday.initForm();
                     cbOption1.Text = returnData[0];
                     cbOption2.Text = returnData[1];
                     cbOption3.Text = returnData[2];
@@ -101,9 +100,9 @@ namespace Holiday_App
                     lblHolType.Text = returnData[5];
                     break;
                 case "Cultural":
-                    HolidayTypeClasses.Cultral cultHoliday = new HolidayTypeClasses.Cultral(numberOfPassangers, false);
+                    HolidayTypeClasses.Cultral cultHoliday = new HolidayTypeClasses.Cultral();
                     cbHotelReq.Text = "Hotel Required";
-                    returnData = cultHoliday.initForm(1);
+                    returnData = cultHoliday.initForm();
                     cbOption1.Text = returnData[0];
                     cbOption2.Text = returnData[1];
                     cbOption3.Text = returnData[2];
@@ -240,12 +239,12 @@ namespace Holiday_App
         }
         private void btnStaffView_Click(object sender, EventArgs e) // this method creates the staffView which creatss the invoice
         {
-            sortData();
-            staffView frm = new staffView(double.Parse(lblBasePrice.Text), hotel, extras, fc, namesArrayString);
-            frm.Show();
+            sortData(); // calls the sortData method
+            staffView frm = new staffView(double.Parse(lblBasePrice.Text), hotel, extras, fc, namesArrayString); // creates an object of class staffView which sends it the required data from the constructor
+            frm.Show(); // makes the form visiable
         }
 
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        private void checkBox5_CheckedChanged(object sender, EventArgs e) // these last methods change which checkboxes are selectable depending on which hotel is selected
         {
             if (!cbHotelReq.Checked)
             {

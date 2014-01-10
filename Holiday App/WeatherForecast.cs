@@ -39,18 +39,18 @@ namespace Holiday_App
     public partial class WeatherForecast : Form
     {
 
-        public WeatherForecast(string startDate, string endDate, string dest)
+        public WeatherForecast(string startDate, string endDate, string dest) //the constructor takes the new data
         {
         
             
-            Process.Start("http://www.bbc.co.uk/weather/" + workOut(dest));
+            Process.Start("http://www.bbc.co.uk/weather/" + workOut(dest)); // starts the default browser 
 
            
             
         }
 
 
-        private string workOut(string dest)
+        private string workOut(string dest) // class works out the the number of the city for the bbc weather website
         {
 
             switch (dest)

@@ -27,18 +27,13 @@ namespace Holiday_App.HolidayTypeClasses
 {
     class Cultral : BaseHolidayClass
     {
-        public string[] initFormReturn = new string[6];
 
-        public Cultral(int numberOfPassangers, bool firstClass) 
-       {
-           numberOfCustomers = numberOfPassangers;
-           hotelRequired = true;
-           extrasIncluded = 1;
-           
+        public Cultral() 
+       { 
           
        }
 
-        public string[] initForm(int i)
+        public string[] initForm() // function for setting the text in the options
         {
 
 

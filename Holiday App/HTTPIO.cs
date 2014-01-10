@@ -36,7 +36,7 @@ namespace Holiday_App
 {
     class HTTPIO
     {
-        static string HTTPRequest(string location)
+        static string HTTPRequest(string location) // constrcutor which takes the location string
         {
 
             return null;
@@ -49,26 +49,26 @@ namespace Holiday_App
             try
             {
                 
-                HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=" + location + "&mode=xml");
-                HttpWebResponse response = (HttpWebResponse)httpReq.GetResponse();
-                Stream readStream = response.GetResponseStream();
-                StreamReader streamreader = new StreamReader(readStream, Encoding.UTF8);
-                string responseString = streamreader.ReadToEnd();
+                HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=" + location + "&mode=xml"); //  starts a web request to an api hosted by openweathermap which returns an xml document with weather data
+                HttpWebResponse response = (HttpWebResponse)httpReq.GetResponse(); // recieves the response
+                Stream readStream = response.GetResponseStream(); // the stream reader reads the response
+                StreamReader streamreader = new StreamReader(readStream, Encoding.UTF8); // sets it to a stream reader with the UTF8 encoding
+                string responseString = streamreader.ReadToEnd(); // reads ther esponse to a string
              
 
-                XDocument XMLDoc = XDocument.Parse(responseString);
+                XDocument XMLDoc = XDocument.Parse(responseString); // parses the recieved document into an object intended for working with xml documents
 
 
-                IEnumerable att = (IEnumerable)XMLDoc.XPathEvaluate("/current/weather/@value");
-                Console.WriteLine(att.Cast<XAttribute>().FirstOrDefault());
-                str = att.Cast<XAttribute>().FirstOrDefault().ToString();
+                IEnumerable att = (IEnumerable)XMLDoc.XPathEvaluate("/current/weather/@value"); // the node we are interested in
+                Console.WriteLine(att.Cast<XAttribute>().FirstOrDefault()); // debug info
+                str = att.Cast<XAttribute>().FirstOrDefault().ToString(); // sets the string str to the found node
                
                 
-                string[] results = str.Split('"');
+                string[] results = str.Split('"'); // splits it by the " character to get the data we are after split up
 
-                return results[1];
+                return results[1]; // the exact word we are after
             }
-            catch (System.Net.WebException e)
+            catch (System.Net.WebException e) // if an exception was thrown, this will execute
             {
 
                 return e.ToString();
@@ -80,10 +80,10 @@ namespace Holiday_App
 
         }
 
-        public double getDistance(string start, string end)
+        public double getDistance(string start, string end) // this method works out the distance between two locations
         {
 
-            HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create("http://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + start + "&destinations=" + end + "&sensor=false");
+            HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create("http://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + start + "&destinations=" + end + "&sensor=false"); // same as above but queries google map API with the two location
             HttpWebResponse response = (HttpWebResponse)httpReq.GetResponse();
             Stream readStream = response.GetResponseStream();
             StreamReader streamreader = new StreamReader(readStream, Encoding.UTF8);

@@ -8,9 +8,9 @@
  *  (at your option) any later version.                                         *
  *                                                                              *
  *  My Holiday planning coursework app is distributed in the hope               *
- *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                *
+ *  that it will be useful, but WITHOUT ANY WARRANTY; without even the implied  *                                                
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.             *
- * See the GNU General Public License for more details.                         *         *
+ * See the GNU General Public License for more details.                         *         
  *                                                                              *
  * You should have received a copy of the GNU General Public License            *
  * along with  My Holiday planning coursework app.                              *
@@ -28,19 +28,23 @@ namespace Holiday_App.HolidayTypeClasses
    {
 
       
-       public JustFlights(int numberOfPassangers, bool firstClass) 
+      
+       public JustFlights() 
        {
-           numberOfCustomers = numberOfPassangers;
-           hotelRequired = false;
-           extrasIncluded = 0;
-            
 
        }
 
-       public string[] returnData()
+       public string[] initForm() // function for setting the text in the options
        {
 
-           return null;
+
+           initFormReturn[0] = "You have selected Just Flights";
+           initFormReturn[1] = "You have selected Just Flights";
+           initFormReturn[2] = "You have selected Just Flights";
+           initFormReturn[3] = "You have selected Just Flights";
+           initFormReturn[4] = "You have selected Just Flights";
+           initFormReturn[5] = "You have selected Just Flights";
+           return initFormReturn;
        }
 
 

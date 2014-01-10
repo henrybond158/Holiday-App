@@ -27,12 +27,8 @@ namespace Holiday_App.HolidayTypeClasses
 {
     class BaseHolidayClass
     {
-        public int numberOfCustomers;
-        public bool hotelRequired;
-        public bool firstClass;
-        public int extrasIncluded;
-
-
+        //creates the returnable string array in the baseClass as all  other holiday classes will use it
+        public string[] initFormReturn = new string[6];
 
     }
 }

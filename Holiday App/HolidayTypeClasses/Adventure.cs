@@ -27,21 +27,15 @@ namespace Holiday_App.HolidayTypeClasses
 {
     class Adventure : BaseHolidayClass
     {
-        public string[] initFormReturn = new string[6];
-           public Adventure(int numberOfPassangers, bool firstClass) 
+        
+           public Adventure()  
        {
-           numberOfCustomers = numberOfPassangers;
-           hotelRequired = true;
-           extrasIncluded = 1;
-            
-
+     
        }
 
 
-           public string[] initForm(int i)
+           public string[] initForm() // function for setting the text in the options
            {
-
-
 
                initFormReturn[0] = "Hiking Gear";
                initFormReturn[1] = "Guide Book";

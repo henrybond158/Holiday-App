@@ -33,40 +33,40 @@ namespace Holiday_App
     public partial class staffView : Form
     {
         
-        public staffView(double flights, int hotels, int extra, bool FC ,string[] namesArray)
+        public staffView(double flights, int hotels, int extra, bool FC ,string[] namesArray) // takes all the data required for creating an invoice
         {
             InitializeComponent();
             
-            lblFlights.Text = ("£" + flights.ToString());
+            lblFlights.Text = ("£" + flights.ToString()); // displays the data for the user to view
             lblHotels.Text = ("£" + hotels.ToString());
             lblExtras.Text = ("£" + extra.ToString());
             double profit = (flights + hotels + extra) * 0.1;
             lblProfit.Text = ("£" + profit.ToString());
-            if (!FC)
+            if (!FC) // if not first class, calculate costs
             {
                 double total = (flights + hotels + extra + profit);
             }
-            else
+            else // if first class, calcualte cost and double
             {
                 double total = ((flights + hotels + extra + profit) * 2);
 
-            }
+            } // calls the create invoice class sending it the required data
             createInvoice(flights,hotels,extra, namesArray);
         }
 
         private void btnInvoice_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("Notepad.exe", "invoice.txt");
+            System.Diagnostics.Process.Start("Notepad.exe", "invoice.txt"); // starts the notepad program opening invoice.txt
         }
         private void createInvoice(double flights, int hotels, int extra, string[]NamesArray)
         {
             
-            StreamWriter textW = File.CreateText("invoice.txt");
-            textW.WriteLine("Invoice for " + NamesArray[0] + " " + NamesArray[1]);
-            textW.WriteLine("Passangers: ");
-            int counter = 0;
-            string[] temp = new string[3];
-            foreach (string str in NamesArray)
+            StreamWriter textW = File.CreateText("invoice.txt"); // declares a stream writer to write text to the invoice.txt file
+            textW.WriteLine("Invoice for " + NamesArray[0] + " " + NamesArray[1]); //writes the name to the file
+            textW.WriteLine("Passangers: "); // and the passangers
+            int counter = 0; // declares an integer for counter control
+            string[] temp = new string[3]; // creates an array 3 long, to fill the first & last name & age fields for each line
+            foreach (string str in NamesArray) // this loops around all of the items in the name array populating the first name, last name and age fields and then writes that to a line
             {
                 temp[counter] = str;
                 counter++;
@@ -79,7 +79,7 @@ namespace Holiday_App
 
             }
 
-            textW.Close();
+            textW.Close(); // closes the file cleanly
 
         }
 
