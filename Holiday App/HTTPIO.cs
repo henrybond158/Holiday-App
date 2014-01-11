@@ -36,6 +36,12 @@ namespace Holiday_App
 {
     class HTTPIO
     {
+        private HttpWebRequest httpReq;
+        private HttpWebResponse response;
+        private Stream readStream;
+        private StreamReader streamreader;
+        private string responseString;
+        private XDocument XMLDoc;
         static string HTTPRequest(string location) // constrcutor which takes the location string
         {
 
@@ -48,15 +54,15 @@ namespace Holiday_App
             string str = "";
             try
             {
-                
-                HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=" + location + "&mode=xml"); //  starts a web request to an api hosted by openweathermap which returns an xml document with weather data
-                HttpWebResponse response = (HttpWebResponse)httpReq.GetResponse(); // recieves the response
-                Stream readStream = response.GetResponseStream(); // the stream reader reads the response
-                StreamReader streamreader = new StreamReader(readStream, Encoding.UTF8); // sets it to a stream reader with the UTF8 encoding
-                string responseString = streamreader.ReadToEnd(); // reads ther esponse to a string
+
+                httpReq = (HttpWebRequest)WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=" + location + "&mode=xml"); //  starts a web request to an api hosted by openweathermap which returns an xml document with weather data
+                response = (HttpWebResponse)httpReq.GetResponse(); // recieves the response
+                readStream = response.GetResponseStream(); // the stream reader reads the response
+                streamreader = new StreamReader(readStream, Encoding.UTF8); // sets it to a stream reader with the UTF8 encoding
+                responseString = streamreader.ReadToEnd(); // reads ther esponse to a string
              
 
-                XDocument XMLDoc = XDocument.Parse(responseString); // parses the recieved document into an object intended for working with xml documents
+                XMLDoc = XDocument.Parse(responseString); // parses the recieved document into an object intended for working with xml documents
 
 
                 IEnumerable att = (IEnumerable)XMLDoc.XPathEvaluate("/current/weather/@value"); // the node we are interested in
@@ -83,12 +89,12 @@ namespace Holiday_App
         public double getDistance(string start, string end) // this method works out the distance between two locations
         {
 
-            HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create("http://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + start + "&destinations=" + end + "&sensor=false"); // same as above but queries google map API with the two location
-            HttpWebResponse response = (HttpWebResponse)httpReq.GetResponse();
-            Stream readStream = response.GetResponseStream();
-            StreamReader streamreader = new StreamReader(readStream, Encoding.UTF8);
-            string responseString = streamreader.ReadToEnd();
-            XDocument XMLDoc = XDocument.Parse(responseString);
+            httpReq = (HttpWebRequest)WebRequest.Create("http://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + start + "&destinations=" + end + "&sensor=false"); // same as above but queries google map API with the two location
+            response = (HttpWebResponse)httpReq.GetResponse();
+            readStream = response.GetResponseStream();
+            streamreader = new StreamReader(readStream, Encoding.UTF8);
+            responseString = streamreader.ReadToEnd();
+            XMLDoc = XDocument.Parse(responseString);
             XElement distElement = XMLDoc.Descendants("distance").FirstOrDefault();
             XElement textElement = distElement.Descendants("value").FirstOrDefault();
             double distance = double.Parse(textElement.Value.ToString());

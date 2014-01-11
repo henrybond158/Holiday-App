@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Holiday_App.adminForm" Collapsed="true">
-    <Position X="7.5" Y="5" Width="1.5" />
+  <Class Name="Holiday_App.adminForm">
+    <Position X="6.25" Y="3.75" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAACIQAAAAIQCAAIACAgQAAAAAAAAEAQAAAIA=</HashCode>
+      <HashCode>AAAAAAgAACIQAAAAIACAAIACAAQAAAAQAAAEAQAAAIA=</HashCode>
       <FileName>adminForm.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -70,7 +70,7 @@
       <FileName>HolidayTypeClasses\Adventure.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Holiday_App.HolidayTypeClasses.BaseHolidayClass" Collapsed="true">
+  <Class Name="Holiday_App.HolidayTypeClasses.BaseHolidayClass">
     <Position X="3.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

@@ -28,21 +28,29 @@ namespace Holiday_App
 {
     class dateChanged 
     {
-       
-
+        // fields for use in both methods
+        private DateTime firstDateDT;
+        private DateTime secondDateDT;
+        private string[] firstDateSplit;
+        private string returnString;
+        private string firstDateFixer;
+        private string[] firstFixedString;
+        private string[] secondDateSplit;
+        private string secondDateFixer;
+        private string[] secondFixedString;
+        
         public string calculateLength (string firstDate, string secondDate) // this method calcualtes the length of the two selected dates
         {
 
-            string returnString; // declares string
-            string[] firstDateSplit = (firstDate.Split(':')); // splits the string where there are :
-            string firstDateFixer = firstDateSplit[2]; // selectes the one where the date is held
-            string[] firstFixedString = firstDateFixer.Split(' '); // splits the string where there is a space so that the date is correct
-            string[] secondDateSplit = (secondDate.Split(':')); // same as above but for second date
-            string secondDateFixer = secondDateSplit[2];
-            string[] secondFixedString = secondDateFixer.Split(' ');
+            firstDateSplit = (firstDate.Split(':')); // splits the string where there are :
+            firstDateFixer = firstDateSplit[2]; // selectes the one where the date is held
+            firstFixedString = firstDateFixer.Split(' '); // splits the string where there is a space so that the date is correct
+            secondDateSplit = (secondDate.Split(':')); // same as above but for second date
+            secondDateFixer = secondDateSplit[2];
+            secondFixedString = secondDateFixer.Split(' ');
 
-           DateTime firstDateDT = Convert.ToDateTime(firstFixedString[1]); //declares to objects of class date time so that we can work out the difference using in built classes
-           DateTime secondDateDT = Convert.ToDateTime(secondFixedString[1]);
+            firstDateDT = Convert.ToDateTime(firstFixedString[1]); //declares to objects of class date time so that we can work out the difference using in built classes
+            secondDateDT = Convert.ToDateTime(secondFixedString[1]);
 
            double numberofDays = (secondDateDT - firstDateDT).TotalDays; // using the TotalDays method of the datetime class, we calcualte the number of days
            if (numberofDays >= 0) // if the number  is greater or equal to zero, this is called
@@ -64,15 +72,15 @@ namespace Holiday_App
         public bool isBeforeToday(string firstDate, string secondDate) // this method calcualtes whether the date selected is before todays date
         {
            
-            string[] firstDateSplit = (firstDate.Split(':'));
-            string firstDateFixer = firstDateSplit[2];
-            string[] firstFixedString = firstDateFixer.Split(' ');
-            string[] secondDateSplit = (secondDate.Split(':'));
-            string secondDateFixer = secondDateSplit[2];
-            string[] secondFixedString = secondDateFixer.Split(' '); 
+            firstDateSplit = (firstDate.Split(':'));
+            firstDateFixer = firstDateSplit[2];
+            firstFixedString = firstDateFixer.Split(' ');
+            secondDateSplit = (secondDate.Split(':'));
+            secondDateFixer = secondDateSplit[2];
+            secondFixedString = secondDateFixer.Split(' '); 
 
-            DateTime firstDateDT = Convert.ToDateTime(firstFixedString[1]);
-            DateTime secondDateDT = Convert.ToDateTime(secondFixedString[1]); // same as above
+            firstDateDT = Convert.ToDateTime(firstFixedString[1]);
+            secondDateDT = Convert.ToDateTime(secondFixedString[1]); // same as above
 
             double numberofDays = (secondDateDT - firstDateDT).TotalDays;  // same calcualtion as above
             if (numberofDays < 0) // if less than 0, returns false

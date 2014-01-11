@@ -18,17 +18,21 @@ namespace Holiday_App
         public adminForm() // the constrctur
         {
             InitializeComponent();
+            constructList();
+            
+        }
+        private void constructList()
+        {
             string[] array = pop.initLists(); // creates an array from the method initLists in class populate... which creates an array of all the airports
 
             foreach (string str in array)
             {
-                lslAirRemove.Items.Add(str);
+                
                 listBoxAirAdd.Items.Add(str);
             }
-            lslAirRemove.Items.Remove(" ");
+           
             listBoxAirAdd.Items.Remove(" ");
             
-           
         }
         static string ConvertStringArrayToString(string[] array) // this is a function which changes an array to a string
         {
@@ -74,39 +78,18 @@ namespace Holiday_App
                 string[] myArray = File.ReadAllLines(path); // reads all lines into the array
                 test = stringWriter.ToString(); // passes the new xml from the xmltextwriter to a string
                 int index0 = myArray.GetLength(0); // creates an int with the length of the array
+
+                string[] splitString = myArray[1].Split('<'); // splits the string so we can add it to the master list of airports
+                string allports =  "<" + splitString[1] + "," + txtBoxAirport.Text + "" + " </AllAirport>"; // reconstructs the master list
                 myArray[index0 - 1] = test; // sets the last but one in the array to be the newly built xml tag
+                myArray[1] = allports; // sets the master list location to the new master list
                 File.WriteAllLines(path, myArray); //writes that to the file
                 File.AppendAllText(path, "</Airports>"); // appends the text with the closing tag
-                /*StreamWriter str = new StreamWriter(path);
-                str.WriteLine("</Airports>");
-            str.app
-                str.Close();
-                  
-                  */
-           
+
+                constructList();
         }
 
-        private void btnRmPort_Click(object sender, EventArgs e)
-        {
-            XmlDocument xml = new XmlDocument();
-            xml.Load(("XMLFile1.xml"));
-            string test1 = lslAirRemove.SelectedItem.ToString();
-
-            string[] test0 = test1.Split(' ');
-
-            if (test0.Length > 1)
-            {
-                test1 = test1.Replace(" ", "");
-            }
-            XmlNodeList removeNode = xml.SelectNodes("//" + test1);
-            foreach (XmlNode node in removeNode)
-            {
-                node.ParentNode.RemoveChild(node);
-
-            }
-           // removeNode.RemoveAll();
-            
-        }
+      
 
         private void adminForm_Load(object sender, EventArgs e)
         {
