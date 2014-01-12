@@ -37,9 +37,9 @@ namespace Holiday_App
 {
     public partial class MainSelectionPage : Form
     {
-        string weatherString = ""; // declares a string for use in deciding what weather icon is to be used
+        private string weatherString = ""; // declares a string for use in deciding what weather icon is to be used
         // declares an object to populate the airport selection lists
-        populateOutBoundAirport popList = new populateOutBoundAirport();
+        private populateOutBoundAirport popList = new populateOutBoundAirport();
         public MainSelectionPage()
         {
             InitializeComponent();
@@ -439,35 +439,9 @@ namespace Holiday_App
 
 
             MessageBox.Show(weather);
+            pictureBox1.ImageLocation = "http://openweathermap.org/img/w/" + weather + ".png";
 
 
-            if (weather == "Clouds")
-            {
-                weatherString = "Assets/WeatherIcons/Clouds.png";
-
-            }
-            else if (weather == "Drizzle")
-            {
-
-
-
-            }
-            else if (weather == "Rain")
-            {
-
-                weatherString = "Assets/WeatherIcons/drizzleDay.png";
-
-            }
-            else if (weather == "Few Clouds")
-            {
-
-
-            }
-            else if (weather == "Sky Is Clear")
-            {
-
-
-            }
 
         }
         private string[] createNameList() // this method bundles the data correctly for sending to the Quote Page so that an invoice can be created 
@@ -482,7 +456,7 @@ namespace Holiday_App
                 case 1:
 
                     string[] names1 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text}; // delcares an array with the contents of the required firstname, last name and age boxes
-                    Quote form1 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names1); // creates an object of the new form, passing the constructor the required data
+                    Quote form1 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names1,  int.Parse(lblNumOfDays.Text)); // creates an object of the new form, passing the constructor the required data
 
                     form1.Show(); // calls the method which displays the new form object on the screen
                     
@@ -490,27 +464,27 @@ namespace Holiday_App
                     break;
                 case 2: // and so on
                     string[] names2 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text};
-                     Quote form2 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names2);
+                     Quote form2 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names2,  int.Parse(lblNumOfDays.Text));
 
                     form2.Show();
                     break;
                 case 3:
                     string[] names3 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text };
-                     Quote form3 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names3);
+                     Quote form3 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names3, int.Parse(lblNumOfDays.Text));
 
                     form3.Show();
 
                     break;
                 case 4:
                     string[] names4 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text, txtLN3.Text, cmbAge3.Text };
-                     Quote form4 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names4);
+                     Quote form4 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names4,  int.Parse(lblNumOfDays.Text));
 
                     form4.Show();
 
                     break;
                 case 5:
                     string[] names5 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text, txtLN3.Text, cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text };
-                     Quote form5 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names5);
+                     Quote form5 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names5, int.Parse(lblNumOfDays.Text));
 
                     form5.Show();
 
@@ -518,7 +492,7 @@ namespace Holiday_App
                 case 6:
                     string[] names6 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text,txtLN3.Text,cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text, 
                                             txtFN5.Text, txtLN5.Text, cmbAge5.Text};
-                     Quote form6 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names6);
+                     Quote form6 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names6, int.Parse(lblNumOfDays.Text));
 
                     form6.Show();
 
@@ -527,7 +501,7 @@ namespace Holiday_App
                 case 7:
                     string[] names7 = { txtFN0.Text, txtLN0.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text,txtLN3.Text,cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text, 
                                             txtFN5.Text, txtLN5.Text, cmbAge5.Text, txtFN6.Text, txtLN6.Text, cmbAge6.Text};
-                     Quote form7 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names7);
+                     Quote form7 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names7, int.Parse(lblNumOfDays.Text));
 
                     form7.Show();
 
@@ -536,7 +510,7 @@ namespace Holiday_App
                   string[] names8 = { txtFN0.Text, txtLN1.Text, cmbAge0.Text, txtFN1.Text, txtLN1.Text, cmbAge1.Text, txtFN2.Text, txtLN2.Text, cmbAge2.Text, txtFN3.Text, txtLN3.Text, cmbAge3.Text, txtFN4.Text, txtLN4.Text, cmbAge4.Text, 
                                             txtFN5.Text, txtLN5.Text, cmbAge5.Text, txtFN6.Text, txtLN6.Text, cmbAge6.Text, txtFN7.Text, txtLN7.Text, cmbAge7.Text};
 
-                  Quote form8 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names8);
+                  Quote form8 = new Quote(cmbHolTYpe.Text, cmbPassangers.Text, cmbOutAirport.Text, cmbDestPorts.Text, chkFC.Checked, names8, int.Parse(lblNumOfDays.Text));
 
                     form8.Show();
 
@@ -571,7 +545,7 @@ namespace Holiday_App
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnWeatherForecast(object sender, EventArgs e)
         {
             WeatherForecast wfFrm = new WeatherForecast(startCal.ToString(), endCal.ToString(), cmbDestPorts.Text); // creates a weather forecast class passing data to it's constructor, to open full weather forecast
           
@@ -605,7 +579,7 @@ namespace Holiday_App
 
         }
 
-        private void btnClose_Click(object sender, EventArgs e) // closes the form if the exit button is clicked
+        private void btnExit_click(object sender, EventArgs e) // closes the form if the exit button is clicked
         {
             Environment.Exit(0);
         }

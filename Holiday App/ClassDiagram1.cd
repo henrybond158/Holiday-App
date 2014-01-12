@@ -7,29 +7,33 @@
       <FileName>adminForm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Holiday_App.dateChanged" Collapsed="true">
-    <Position X="11.5" Y="0.5" Width="1.5" />
+  <Class Name="Holiday_App.dateChanged">
+    <Position X="11.75" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEA=</HashCode>
+      <HashCode>AAAAAAAAAAAwAAAAAAAAIAAACAAAAAAAAABEAAEACkA=</HashCode>
       <FileName>dateChanged.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Holiday_App.HTTPIO" Collapsed="true">
-    <Position X="13.25" Y="0.5" Width="1.5" />
+    <Position X="11.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAAGEAIAAAAQIAAAAAAAAAAAAAAAAAAQACAAAAAAAA=</HashCode>
       <FileName>HTTPIO.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Holiday_App.MainSelectionPage" Collapsed="true">
-    <Position X="15" Y="0.5" Width="1.5" />
+  <Class Name="Holiday_App.MainSelectionPage">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>CAAgBAFAFCAgCxAAAICAAAACyPkvREhIEMhCEAJgAAA=</HashCode>
+      <HashCode>CAAgBAFAFCAgDxAAAICAAAACyPknBEhIEMhCEAJgAAA=</HashCode>
       <FileName>MainSelectionPage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Holiday_App.populateOutBoundAirport" Collapsed="true">
-    <Position X="9.75" Y="1.5" Width="1.5" />
+    <Position X="0.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>populateOutBoundAirport.cs</FileName>
@@ -42,7 +46,7 @@
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Holiday_App.Quote" Collapsed="true">
+  <Class Name="Holiday_App.Quote">
     <Position X="13.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAQBgCYAACDUUBsCQAjgEBAGAEAAIAIACAAAAAIABAA=</HashCode>
@@ -50,16 +54,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Holiday_App.staffView" Collapsed="true">
-    <Position X="11.5" Y="2.5" Width="1.5" />
+    <Position X="10" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACEAABABAACAAAAKAAAAABAAAEgAAAAAUAA=</HashCode>
       <FileName>staffView.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Holiday_App.WeatherForecast" Collapsed="true">
-    <Position X="13.25" Y="2.5" Width="1.5" />
+  <Class Name="Holiday_App.WeatherForecast">
+    <Position X="3.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAACAAAAAAAACAAAACAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WeatherForecast.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -105,7 +109,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Holiday_App.Properties.Settings" Collapsed="true">
-    <Position X="9.75" Y="2.5" Width="1.5" />
+    <Position X="0.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>

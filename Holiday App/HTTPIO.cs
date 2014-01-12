@@ -65,14 +65,15 @@ namespace Holiday_App
                 XMLDoc = XDocument.Parse(responseString); // parses the recieved document into an object intended for working with xml documents
 
 
-                IEnumerable att = (IEnumerable)XMLDoc.XPathEvaluate("/current/weather/@value"); // the node we are interested in
+                IEnumerable att = (IEnumerable)XMLDoc.XPathEvaluate("/current/weather/@icon"); // the node we are interested in
+               
                 Console.WriteLine(att.Cast<XAttribute>().FirstOrDefault()); // debug info
                 str = att.Cast<XAttribute>().FirstOrDefault().ToString(); // sets the string str to the found node
-               
-                
+
                 string[] results = str.Split('"'); // splits it by the " character to get the data we are after split up
 
-                return results[1]; // the exact word we are after
+                return results[1];
+                
             }
             catch (System.Net.WebException e) // if an exception was thrown, this will execute
             {

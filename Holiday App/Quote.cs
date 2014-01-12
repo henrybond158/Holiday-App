@@ -44,15 +44,17 @@ namespace Holiday_App
         int extras;
         int numberOfPassangers;
         bool fc;
+        int numberOFDays;
         string[] returnData = new string[6];
         string[] namesArrayString;
-        public Quote(string holidayType, string numberOfPasangers, string inputAirport, string DestAirport, bool firstClass, string[] namesArray) // the constructor method for this class, taking the data required for creating a quote
+        public Quote(string holidayType, string numberOfPasangers, string inputAirport, string DestAirport, bool firstClass, string[] namesArray, int numberOfDays) // the constructor method for this class, taking the data required for creating a quote
         {
             namesArrayString = namesArray; // passes the array of names to the local variable
             fc = firstClass; // sends the firstclass bool to the local variable
             InitializeComponent(); // inbuilt function
             callClass(holidayType); // calls method callClass which calls the correct class for the holiday type selected
             lblResults.Text = numberOfPasangers; // this shows the number of passangers on the quote page
+            numberOFDays = numberOfDays; // sets the number of days so we can calcualte the hotel cost
             numberOfPassangers = int.Parse(numberOfPasangers); // turns the string with the number in into an int
             Thread t = new Thread(() => getPrice(inputAirport, DestAirport)); // starts a new thread to start internet operations to stop the program for hanging whilst waiting for results
             t.Start(); // starts the new thread
@@ -194,23 +196,23 @@ namespace Holiday_App
         {
             if (cbHostel.Checked) // this creates the cost for the hotel selected
             {
-                hotel = 10 * numberOfPassangers;
+                hotel = 10 * numberOfPassangers * numberOFDays;
 
             }
             else if (cbLEH.Checked)
             {
-                hotel = 25 * numberOfPassangers;
+                hotel = 25 * numberOfPassangers * numberOFDays;
 
 
             }
             else if (cbMRH.Checked)
             {
-                hotel = 50 * numberOfPassangers;
+                hotel = 50 * numberOfPassangers * numberOFDays;
             }
             else if (CBHEH.Checked)
             {
 
-                hotel = 75 * numberOfPassangers;
+                hotel = 75 * numberOfPassangers * numberOFDays;
             }
             else
             {

@@ -73,7 +73,7 @@
             this.cmbHolTYpe = new System.Windows.Forms.ComboBox();
             this.currentDate = new System.Windows.Forms.MonthCalendar();
             this.tmrISCompleted = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAdmin = new System.Windows.Forms.Button();
             this.chkFC = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
@@ -1060,7 +1060,7 @@
             this.btnExtendedForecast.TabIndex = 10;
             this.btnExtendedForecast.Text = "Get Extended Weather Forecasts";
             this.btnExtendedForecast.UseVisualStyleBackColor = true;
-            this.btnExtendedForecast.Click += new System.EventHandler(this.button1_Click);
+            this.btnExtendedForecast.Click += new System.EventHandler(this.btnWeatherForecast);
             // 
             // lblNumOfDays
             // 
@@ -1073,9 +1073,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(76, 408);
+            this.pictureBox1.Location = new System.Drawing.Point(101, 419);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 61);
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
@@ -1117,15 +1117,15 @@
             // 
             this.tmrISCompleted.Tick += new System.EventHandler(this.tmrIsCompleted_Tick);
             // 
-            // button1
+            // btnAdmin
             // 
-            this.button1.Location = new System.Drawing.Point(798, 488);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Admin";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnAdmin.Location = new System.Drawing.Point(798, 488);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(75, 23);
+            this.btnAdmin.TabIndex = 15;
+            this.btnAdmin.Text = "Admin";
+            this.btnAdmin.UseVisualStyleBackColor = true;
+            this.btnAdmin.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // chkFC
             // 
@@ -1154,7 +1154,7 @@
             this.btnClose.TabIndex = 18;
             this.btnClose.Text = "Exit";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.btnExit_click);
             // 
             // MainSelectionPage
             // 
@@ -1164,7 +1164,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.chkFC);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAdmin);
             this.Controls.Add(this.cmbHolTYpe);
             this.Controls.Add(this.btnGetPrices);
             this.Controls.Add(this.pictureBox1);
@@ -1262,7 +1262,7 @@
         private System.Windows.Forms.ComboBox cmbHolTYpe;
         private System.Windows.Forms.MonthCalendar currentDate;
         private System.Windows.Forms.Timer tmrISCompleted;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdmin;
         private System.Windows.Forms.CheckBox chkFC;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnClose;
