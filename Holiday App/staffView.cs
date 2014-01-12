@@ -78,9 +78,9 @@ namespace Holiday_App
                 }
 
             }
-            textW.WriteLine("Extras" + extra.ToString());
-            textW.WriteLine("Hotels" + hotels.ToString());
-            textW.WriteLine("Flights cost" + flights.ToString());
+            textW.WriteLine("Extras £" + extra.ToString());
+            textW.WriteLine("Hotels £" + hotels.ToString());
+            textW.WriteLine("Flights cost £" + flights.ToString());
 
             textW.Close(); // closes the file cleanly
 
