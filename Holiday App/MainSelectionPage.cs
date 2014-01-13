@@ -438,7 +438,7 @@ namespace Holiday_App
         {
 
 
-            MessageBox.Show(weather);
+            //MessageBox.Show(weather);
             pictureBox1.ImageLocation = "http://openweathermap.org/img/w/" + weather + ".png";
 
 
